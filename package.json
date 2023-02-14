@@ -6,6 +6,7 @@
     "start": "bge launch ./dist/index.js"
   },
   "devDependencies": {
+    "bge-dev": "^0.1.4",
     "ignore-loader": "^0.1.2",
     "ts-loader": "^9.4.2",
     "typescript": "^4.9.4",
