@@ -6,6 +6,9 @@ import { PlayingCard } from "bge-playingcard";
  * @description It can contain any objects the player owns, and properties like their score or health.
  */
 export class Player extends bge.Player {
+    
+    finalScore?: number;
+
     /**
      * @summary The player's personal hand of cards.
      * @description It has a width in centimetres, and options like which way the cards face, and how to sort them.
