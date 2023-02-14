@@ -3,7 +3,7 @@
   "description": "Card game example, with prompts and scoring",
   "scripts": {
     "build": "webpack",
-    "start": "npx bge test ./dist/index.js"
+    "start": "bge launch ./dist/index.js"
   },
   "devDependencies": {
     "ignore-loader": "^0.1.2",
