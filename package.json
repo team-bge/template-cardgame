@@ -2,16 +2,11 @@
   "name": "template-cardgame",
   "description": "Card game example, with prompts and scoring",
   "scripts": {
-    "build": "webpack",
-    "start": "bge launch ./dist/index.js"
+    "build": "bge build",
+    "start": "bge serve"
   },
   "devDependencies": {
-    "bge-dev": "^0.1.4",
-    "ignore-loader": "^0.1.2",
-    "ts-loader": "^9.4.2",
-    "typescript": "^4.9.4",
-    "webpack": "^5.75.0",
-    "webpack-cli": "^5.0.1"
+    "bge-dev": "^0.1.6"
   },
   "dependencies": {
     "bge-core": "^0.1.7",
