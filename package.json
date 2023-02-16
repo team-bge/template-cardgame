@@ -6,10 +6,10 @@
     "start": "bge serve"
   },
   "devDependencies": {
-    "bge-dev": "^0.1.6"
+    "bge-dev": "^0.2.1"
   },
   "dependencies": {
-    "bge-core": "^0.1.7",
-    "bge-playingcard": "^0.1.5"
+    "bge-core": "^0.2.0",
+    "bge-playingcard": "^0.1.6"
   }
 }
