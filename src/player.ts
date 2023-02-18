@@ -13,7 +13,7 @@ export class Player extends bge.Player {
      * @summary The player's personal hand of cards.
      * @description It has a width in centimetres, and options like which way the cards face, and how to sort them.
      */
-    @bge.display({ isHidden: true })
+    @bge.display()
     readonly hand = new bge.Hand(PlayingCard, 20, {
         orientation: bge.CardOrientation.FaceUp,
         autoSort: PlayingCard.autoSortCompare

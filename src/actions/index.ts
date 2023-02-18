@@ -22,6 +22,7 @@ export default async function main(game: CardGame) {
 async function setup(game: CardGame) {
 
     game.addPlayerZones(x => x.createZone(), {
+        isHidden: true,
         avoid: game.tableCenter.footprint
     });
 
