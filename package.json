@@ -1,15 +1,17 @@
 {
   "name": "template-cardgame",
   "description": "Card game example, with prompts and scoring",
+  "type": "module",
+  "main": "./dist/index.js",
   "scripts": {
     "build": "bge build",
     "start": "bge serve"
   },
   "devDependencies": {
-    "bge-dev": "^0.2.3"
+    "bge-dev": "^0.3.7"
   },
   "dependencies": {
-    "bge-core": "^0.2.4",
-    "bge-playingcard": "^0.1.9"
+    "bge-core": "^0.3.11",
+    "bge-playingcard": "^0.1.10"
   }
 }

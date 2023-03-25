@@ -2,8 +2,8 @@ import * as bge from "bge-core";
 
 import { PlayingCard, PokerHand } from "bge-playingcard";
 
-import { CardGame } from "../game";
-import { Player } from "../player";
+import { CardGame } from "../game.js";
+import { Player } from "../player.js";
 
 export default async function main(game: CardGame) {
 
@@ -20,12 +20,6 @@ export default async function main(game: CardGame) {
 }
 
 async function setup(game: CardGame) {
-
-    game.addPlayerZones(x => x.createZone(), {
-        isHidden: true,
-        avoid: game.tableCenter.footprint
-    });
-
     game.message.set("Setting up the deck...");
 
     game.discardPile.addRange(PlayingCard.generateDeck());
@@ -53,6 +47,8 @@ async function setup(game: CardGame) {
 }
 
 async function playerTurn(game: CardGame, player: Player) {
+
+    console.log(`Player turn: ${player.name}`);
 
     game.message.set("It's {0}'s turn to discard a card!", player);
     

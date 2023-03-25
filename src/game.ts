@@ -1,8 +1,9 @@
 import * as bge from "bge-core";
 import { PlayingCard, PokerHand } from "bge-playingcard";
-import { Player } from "./player";
-import { TableCenter } from "./table";
-import main from "./actions";
+
+import { Player } from "./player.js";
+import { TableCenter } from "./table.js";
+import main from "./actions/index.js";
 
 /**
  * @summary This class contains the meat of your game.
@@ -13,21 +14,21 @@ export class CardGame extends bge.Game<Player> {
      * Draw pile that will gradually deplete during the game.
      */
     readonly drawPile = new bge.Deck(PlayingCard, {
-        orientation: bge.CardOrientation.FaceDown
+        orientation: bge.CardOrientation.FACE_DOWN
     });
 
     /**
      * Players discard cards to this pile.
      */
     readonly discardPile = new bge.Deck(PlayingCard, {
-        orientation: bge.CardOrientation.FaceUp
+        orientation: bge.CardOrientation.FACE_UP
     });
     
     /**
      * This will contain three face-up cards that players can choose from.
      */
     readonly shop = new bge.Hand(PlayingCard, 20, {
-        orientation: bge.CardOrientation.FaceUp
+        orientation: bge.CardOrientation.FACE_UP
     });
 
     /**
@@ -35,6 +36,20 @@ export class CardGame extends bge.Game<Player> {
      */
     @bge.display()
     readonly tableCenter = new TableCenter(this);
+    
+    /**
+     * Displays a zone for each player, arranged in a rectangle around the table.
+     */
+    @bge.display({
+        arrangement: new bge.RectangularArrangement({
+            size: new bge.Vector3(
+                TableCenter.WIDTH + 2,
+                TableCenter.HEIGHT + 2)
+        })
+    })
+    get playerZones() {
+        return this.players.map(x => x.zone);
+    }
 
     /**
      * Button that we can show in the top bar for players to click in a prompt.
@@ -47,6 +62,10 @@ export class CardGame extends bge.Game<Player> {
     constructor() {
         // We need to tell Game<TPlayer> how to construct a player here.
         super(Player);
+    }
+
+    protected override onInitialize(): void {
+        
     }
 
     protected async onRun(): Promise<bge.IGameResult> {

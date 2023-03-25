@@ -1,5 +1,6 @@
 import * as bge from 'bge-core';
-import { CardGame } from './game';
+
+import { CardGame } from './game.js';
 
 /**
  * @summary Required default export describing our game's config.

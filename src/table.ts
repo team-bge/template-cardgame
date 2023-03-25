@@ -1,17 +1,20 @@
-import { display, Zone } from "bge-core";
-import { CardGame } from "./game";
+import * as bge from "bge-core";
+import { CardGame } from "./game.js";
 
 /**
  * This zone displays all the shared objects in the middle of the table.
  * This would be the place to `@display` a board, if your game has one.
  */
-export class TableCenter extends Zone {
+export class TableCenter extends bge.Zone {
     private readonly _game: CardGame;
+
+    static readonly WIDTH = 24;
+    static readonly HEIGHT = 26;
 
     /**
      * Display property for the shared draw pile.
      */
-    @display({ label: "Draw Pile", localPosition: { x: -4, z: 5 }})
+    @bge.display({ label: "Draw Pile", position: { x: -4, y: 5 }})
     get drawPile() {
         return this._game.drawPile;
     }
@@ -19,7 +22,7 @@ export class TableCenter extends Zone {
     /**
      * Display property for the shared discard pile.
      */
-    @display({ label: "Discard Pile", localPosition: { x: 4, z: 5 }})
+    @bge.display({ label: "Discard Pile", position: { x: 4, y: 5 }})
     get discardPile() {
         return this._game.discardPile;
     }
@@ -27,7 +30,7 @@ export class TableCenter extends Zone {
     /**
      * Display property for the shared card shop.
      */
-    @display({ label: "Shop", localPosition: { z: -7 }})
+    @bge.display({ label: "Shop", position: { y: -7 }})
     get shop() {
         return this._game.shop;
     }
@@ -37,7 +40,7 @@ export class TableCenter extends Zone {
 
         this._game = game;
 
-        this.width = 24;
-        this.height = 26;
+        this.width = TableCenter.WIDTH;
+        this.height = TableCenter.HEIGHT;
     }
 }
