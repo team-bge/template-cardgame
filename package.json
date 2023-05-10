@@ -13,5 +13,9 @@
   "dependencies": {
     "bge-core": "^0.3.12",
     "bge-playingcard": "^0.1.10"
+  },
+  "boardgameengine": {
+    "type": "game",
+    "title": "Card Game Template"
   }
 }
