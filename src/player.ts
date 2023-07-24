@@ -1,4 +1,5 @@
 import * as bge from "bge-core";
+
 import { PlayingCard } from "bge-playingcard";
 
 /**
@@ -17,7 +18,10 @@ export class Player extends bge.Player {
      * @summary The player's personal hand of cards.
      * @description It has a width in centimetres, and options like which way the cards face, and how to sort them.
      */
-    @bge.display()
+    @bge.display(function (this: Player) { return {
+        // Card values should only be revealed to the owning player
+        revealedFor: [this]
+    } })
     readonly hand = new bge.Hand(PlayingCard, Player.ZONE_WIDTH - 2, {
         orientation: bge.CardOrientation.FACE_UP,
         autoSort: PlayingCard.autoSortCompare
@@ -32,6 +36,8 @@ export class Player extends bge.Player {
         }
 
         this._zone = new bge.Zone(Player.ZONE_WIDTH, Player.ZONE_HEIGHT);
+        this._zone.label = this.name;
+        this._zone.outlineColor = this.color;
         this._zone.children.addProperties(this);
 
         return this._zone;

@@ -1,9 +1,13 @@
 import * as bge from "bge-core";
-import { PlayingCard, PokerHand } from "bge-playingcard";
+
+import { PlayingCard } from "bge-playingcard";
 
 import { Player } from "./player.js";
 import { TableCenter } from "./table.js";
-import main from "./actions/index.js";
+
+import setup from "./actions/setup.js";
+import playerTurn from "./actions/playerturn.js";
+import finalScoring from "./actions/finalscoring.js";
 
 /**
  * @summary This class contains the meat of your game.
@@ -35,7 +39,7 @@ export class CardGame extends bge.Game<Player> {
      * This zone displays all the shared objects in the middle of the table.
      */
     @bge.display()
-    readonly tableCenter = new TableCenter(this);
+    readonly tableCenter = new TableCenter();
     
     /**
      * Displays a zone for each player, arranged in a rectangle around the table.
@@ -43,8 +47,8 @@ export class CardGame extends bge.Game<Player> {
     @bge.display({
         arrangement: new bge.RectangularArrangement({
             size: new bge.Vector3(
-                TableCenter.WIDTH + 2,
-                TableCenter.HEIGHT + 2)
+                TableCenter.WIDTH + 4,
+                TableCenter.HEIGHT + 4)
         })
     })
     get playerZones() {
@@ -62,17 +66,32 @@ export class CardGame extends bge.Game<Player> {
     constructor() {
         // We need to tell Game<TPlayer> how to construct a player here.
         super(Player);
-    }
 
-    protected override onInitialize(): void {
-        
+        // Set exported "game" variable, so other modules can access it.
+        game = this;
     }
-
+    
+    /**
+     * Main game logic.
+     * @returns Game result including the scores for each player.
+     */
     protected async onRun(): Promise<bge.IGameResult> {
-        await main(this);
+        await setup();
+    
+        let player = bge.random.item(game.players);
+    
+        while (game.drawPile.count > 0) {
+            await playerTurn(player);
+            
+            player = game.getNextPlayer(player);
+        }
+    
+        await finalScoring();
 
         return {
             scores: this.players.map(x => x.finalScore ?? 0)
         };
     }
 }
+
+export let game: CardGame;
